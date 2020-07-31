@@ -30,6 +30,7 @@
                         </div>
                         <div class="box-body">
                             <table id="example2" class="table table-bordered table-hover">
+                                @include('layouts.messages')
                                 <thead>
                                 <tr>
                                     <th>Id</th>

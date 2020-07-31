@@ -3,22 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Http\Requests\CompanyRequest;
+use App\Traits\SaveImages;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+    use SaveImages;
     /**
      * Display a listing of the resource.
-     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
+        //$company = Company::orderBy('id', 'desc')->paginate(10);
+        //10 entries per page, but we don't need that, because i'm using datatables. Main action in @getCompanies
         return view('company.companies');
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -29,35 +35,46 @@ class CompanyController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CompanyRequest $request)
     {
         $data = $request->all();
+
+        if ($request->has('logo')) {
+            $data['logo'] = $this->saveLogo($request->file('logo'));
+        }
+
         $company = new Company;
         $company->create($data);
+
+        return redirect()->back()->with('message', 'Successfully create!');
     }
 
     /**
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
-        //
+        $company = Company::findOrFail($id);
+
+        return view('company.show-company')->with('company', $company);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        //
+        $company = Company::findOrFail($id);
+
+        return view('company.edit-company')->with('company', $company);
     }
 
     /**
@@ -65,22 +82,28 @@ class CompanyController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(CompanyRequest $request, $id)
     {
-        //
+        $company = Company::findOrFail($id);
+        $company->update($request->all());
+
+        return redirect()->back()->with('message', 'Successfully update!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        $company = Company::findOrFail($id);
+        $company->delete();
+
+        return redirect()->back()->with('message', 'Successfully delete!');
     }
 
     public function getCompanies(Request $request)
