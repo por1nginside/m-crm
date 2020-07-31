@@ -16,10 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('custom')->group(function () {
 
     Route::get('/', 'HomeController@index')->name('home');
-    Route::resource('companies', 'CompanyController');
+    Route::resource('companies', 'CompanyController')->except('show');
+    Route::resource('employees', 'EmployeeController')->except('show');
 
     //datatables route
     Route::get('datatables-companies', 'CompanyController@getCompanies')->name('get-companies');
+    Route::get('datatables-employees', 'EmployeeController@getEmployees')->name('get-employees');
 });
 
 Auth::routes(['register' => false]);

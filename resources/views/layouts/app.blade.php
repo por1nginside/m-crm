@@ -57,7 +57,7 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
                 <li><a href={{ route('companies.index') }}><i class="fa fa-industry"></i> <span>Company</span></a></li>
-                <li><a href=><i class="fa fa-users"></i> <span>Employee</span></a></li>
+                <li><a href={{ route('employees.index') }}><i class="fa fa-users"></i> <span>Employee</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->

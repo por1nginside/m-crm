@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EmployeeRequest extends FormRequest
 {
@@ -23,6 +24,7 @@ class EmployeeRequest extends FormRequest
      */
     public function rules()
     {
+        $company = parent::get('company_id');
         $rules = [
             'first_name' => [
                 'required',
@@ -35,12 +37,14 @@ class EmployeeRequest extends FormRequest
             'email' => [
                 'string',
             ],
-            'company' => [
-                'integer',
+            'company_id' => [
+                'required',
+                Rule::exists('employees', 'company_id')
+                    ->where('company_id', $company),
             ],
             'phone' => [
                 'string',
-                'regex:/^\d{2}\s\(\d{3}\)\s\d{3}-\d{4}$/',
+//                'regex:/^\d{2}\s\(\d{3}\)\s\d{3}-\d{4}$/',
             ],
         ];
 

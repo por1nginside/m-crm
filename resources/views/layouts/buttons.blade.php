@@ -1,5 +1,5 @@
-<a href="{{ route($edit, $company) }}" class="btn btn-info btn-xs edit">Edit</a>
-<form id="delete-form-{{ $company }}" method="post" action="{{ route($destroy, $company) }}" style="display: none">
+<a href="{{ route($edit, $entity) }}" class="btn btn-info btn-xs edit">Edit</a>
+<form id="delete-form-{{ $entity }}" method="post" action="{{ route($destroy, $entity) }}" style="display: none">
     @csrf
     @method('DELETE')
 </form>
@@ -7,7 +7,7 @@
     if(confirm('Are you sure, You Want to delete this?'))
     {
     event.preventDefault();
-    document.getElementById('delete-form-{{ $company }}').submit();
+    document.getElementById('delete-form-{{ $entity }}').submit();
     }
     else{
     event.preventDefault();

@@ -34,7 +34,7 @@ class CompanyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\CompanyRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CompanyRequest $request)
@@ -49,19 +49,6 @@ class CompanyController extends Controller
         $company->create($data);
 
         return redirect()->back()->with('message', 'Successfully create!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\View\View
-     */
-    public function show($id)
-    {
-        $company = Company::findOrFail($id);
-
-        return view('company.show-company')->with('company', $company);
     }
 
     /**
@@ -80,7 +67,7 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\CompanyRequest $request
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -166,7 +153,7 @@ class CompanyController extends Controller
                     ->with([
                         'edit' => 'companies.edit',
                         'destroy' => 'companies.destroy',
-                        'company' => $key->id,
+                        'entity' => $key->id,
                     ])
                     ->render();
 
