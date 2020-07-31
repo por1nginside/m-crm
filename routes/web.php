@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('custom')->group(function () {
+
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::resource('companies', 'CompanyController');
+
+    //datatables route
+    Route::get('datatables-companies', 'CompanyController@getCompanies')->name('get-companies');
 });
+
+Auth::routes(['register' => false]);
