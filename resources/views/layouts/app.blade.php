@@ -59,13 +59,24 @@
                 <li><a href={{ route('companies.index') }}><i class="fa fa-industry"></i> <span>Company</span></a></li>
                 <li><a href={{ route('employees.index') }}><i class="fa fa-users"></i> <span>Employee</span></a></li>
             </ul>
+
+            <ul class="navbar-nav ml-auto">
+                ...
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('locale', ['locale' => 'en']) }}">EN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('locale', ['locale' => 'ru']) }}">RU</a>
+                </li>
+            </ul>
+
         </section>
         <!-- /.sidebar -->
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    @yield('content')
-    <!-- /.content-wrapper -->
+@yield('content')
+<!-- /.content-wrapper -->
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">

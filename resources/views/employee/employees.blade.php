@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Companies
+    {{ trans('additional.employee') }}
 @endsection
 
 @section('content')
@@ -10,13 +10,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Air Route
-                <small>Control panel</small>
+                {{ trans('additional.employee') }}
+                <small>{{ trans('additional.panel') }}</small>
             </h1>
-            <a class='btn btn-success' href="{{ route('employees.create') }}">Add New</a>
+            <a class='btn btn-success' href="{{ route('employees.create') }}">{{ trans('additional.add_new') }}</a>
             <ol class="breadcrumb">
-                <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Companies</li>
+                <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i>{{ trans('additional.home') }}</a></li>
+                <li class="active">{{ trans('additional.employee') }}</li>
             </ol>
         </section>
 
@@ -34,13 +34,13 @@
                                 <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>First name</th>
-                                    <th>Last name</th>
-                                    <th>Employee email</th>
-                                    <th>Employee company</th>
-                                    <th>Employee phone</th>
-                                    <th>Created</th>
-                                    <th>Action</th>
+                                    <th>{{ trans('additional.first_name') }}</th>
+                                    <th>{{ trans('additional.last_name') }}</th>
+                                    <th>{{ trans('additional.employee_email') }}</th>
+                                    <th>{{ trans('additional.employee_company') }}</th>
+                                    <th>{{ trans('additional.employee_phone') }}</th>
+                                    <th>{{ trans('additional.created') }}</th>
+                                    <th>{{ trans('additional.action') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
